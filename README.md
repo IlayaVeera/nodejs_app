@@ -34,3 +34,11 @@
 ### 6. run application
    ```
    npm run dev
+   ```
+
+### 7. testing
+
+   open in browser
+   http://public_ip:5000
+
+   insert some data
