@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MySQL Sample App</title>
+</head>
+<body>
+  <h1>Users</h1>
+  <ul id="userList"></ul>
+  
+  <h2>Add User</h2>
+  <form id="userForm">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <button type="submit">Add User</button>
+  </form>
+
+  <script>
+    // Fetch and display users
+    async function loadUsers() {
+      const response = await fetch('/');
+      const users = await response.json();
+      const list = document.getElementById('userList');
+      list.innerHTML = users.map(user => 
+        `<li>${user.name} (${user.email})</li>`
+      ).join('');
+    }
+
+    // Add new user
+    document.getElementById('userForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+      
+      await fetch('/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+      e.target.reset();
+      loadUsers();
+    });
+
+    // Initial load
+    loadUsers();
+  </script>
+</body>
+</html>
