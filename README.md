@@ -1,15 +1,16 @@
 # Deployment Instruction:
-=============================
 
-1. connect server 
-
+### 1. connect server 
+   ```
    ssh -i aws_key.pem ubuntu@public_ip
-  
-2. clone  nodejs_app to server
+  ```
+### 2. clone  nodejs_app to server
+   ```
    git clone git@github.com:IlayaVeera/nodejs_app.git
    cd nodejs_app
+   ```
    
-3. create env variable
+### 3. create env variable
     nano .env
 
     DB_HOST=rds_endpoint
@@ -18,13 +19,18 @@
     DB_NAME=login
     PORT=5000
 
-4. connect db and create table
+### 4. connect db and create table
+   ```
    mysql -h DB_HOST -u DB_USER -p < db/init.sql
+   ```
 
-5. install npm and express module
+### 5. install npm and express module
+   ```
    sudo apt-get install npm -y
    sudo npm install -g nodeman
    sudo npm install express
+   ```
    
-7. run application
+### 6. run application
+   ```
    npm run dev
